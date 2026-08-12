@@ -63,11 +63,147 @@ Basic Flowchart
 
 ### SKY_L1 - Introduction to all components of open-source digital asic design
 
+<img width="863" height="467" alt="image" src="https://github.com/user-attachments/assets/dc960992-1736-4e85-8d8f-613df448eada" />
+
+
+
+<img width="575" height="428" alt="image" src="https://github.com/user-attachments/assets/1c11d21e-be69-4c11-bba3-3b2a15e204d2" />
+
+
+Google worked out an agreement  with skywater to opensource the pdk for the 130nm processed by skywater
+
+as a result google released the **first opensource pdk**
+
+<img width="527" height="494" alt="image" src="https://github.com/user-attachments/assets/391a85fa-d012-4501-82bd-51277ce9680f" />
+
+
+### SKY_L2 - Simplified RTL2GDS flow
+
+<img width="890" height="485" alt="image" src="https://github.com/user-attachments/assets/0912d469-a7d5-438a-b6bf-de9141ebd852" />
+
+
+
+
+**SYNTHESIS**
+
+
+<img width="895" height="503" alt="image" src="https://github.com/user-attachments/assets/0e70c150-3ce4-4b8f-88e3-9a9460c8f33a" />
 
 
 
 
 
 
+**FLOOR AND POWER PLANNING**
+
+Floor planning has 2 types the CHIP FLOOR PLANNING & MACRO FLOOR PLANNING
 
 
+<img width="878" height="501" alt="image" src="https://github.com/user-attachments/assets/eeb5027c-a2c4-415d-9546-88897183e541" />
+
+
+
+
+
+
+**PLACEMENT**
+
+
+<img width="897" height="514" alt="image" src="https://github.com/user-attachments/assets/9c9a8eed-492e-4dc4-aa46-2a453fcdfd5b" />
+
+
+
+
+
+
+**CLOCK TREE SYNTHESIS**
+
+
+
+<img width="928" height="502" alt="image" src="https://github.com/user-attachments/assets/555621ed-770c-46ca-b645-a70df70fece3" />
+
+
+
+
+**ROUTING**
+
+
+
+<img width="878" height="498" alt="image" src="https://github.com/user-attachments/assets/13be7c53-8683-4ff8-ad2b-da1a1511fdba" />
+
+
+
+<img width="575" height="209" alt="image" src="https://github.com/user-attachments/assets/bd3f66f5-bd81-4460-8a3d-0a7be52a1ce8" />
+
+
+
+
+
+
+**SIGN OFF**
+
+
+<img width="902" height="506" alt="image" src="https://github.com/user-attachments/assets/000dc02b-a4ef-4d24-8105-7059cd9871de" />
+
+
+
+### SKY_L3 - Introduction to OpenLANE and Strive chipsets
+
+
+
+<img width="862" height="470" alt="image" src="https://github.com/user-attachments/assets/b5e3b541-2d69-4a37-8c12-2c2912c0ac9f" />
+
+
+**OpenLANE ASIC Flow**
+
+* **Main Goal:**
+  **Produce a clean GDSII with no human intervention (no-human-in-the-loop)**
+
+* Tuned for **SkyWater 130nm Open PDK**
+
+* **Containerized**
+
+  * Functional out of the box
+  * Instructions to build and run natively will follow
+
+
+
+
+1) Can be used to harden Macros and Chips
+2) Two modes of operation:
+3) Design Space Exploration
+4) Large number of design examples
+5) 43 designs with their best configurations
+6) More will be added soon
+
+
+### SKY_L4 - Introduction to OpenLANE detailed ASIC design flow
+
+
+
+
+<img width="869" height="412" alt="image" src="https://github.com/user-attachments/assets/5d7e2aea-ec0f-4526-9f22-91f9c610d5e4" />
+
+
+<img width="869" height="412" alt="image" src="https://github.com/user-attachments/assets/a7fb7e1e-ea48-4133-b967-7719e6506b04" />
+
+
+
+
+
+<img width="552" height="290" alt="image" src="https://github.com/user-attachments/assets/176a7044-3ef6-40b4-b462-e4e566d39f00" />
+
+
+
+
+
+
+It can be used to **generate reports showing how the design and area are affected by different synthesis strategies, helping us choose the most suitable strategy for the design.**
+
+
+
+Design Exploration is used to find the best configuration 
+
+
+
+<img width="436" height="252" alt="image" src="https://github.com/user-attachments/assets/d8d5542b-b7dc-46d9-b00f-dc95ac5f19a2" />
