@@ -1,4 +1,4 @@
-# Openlane-SKY130-WORKSHOP
+<img width="748" height="245" alt="image" src="https://github.com/user-attachments/assets/f18cfa23-34aa-4036-a1a0-8d33ed9ca54a" /># Openlane-SKY130-WORKSHOP
 
 ### Sky130 Day 1 - Inception of open-source EDA, OpenLANE and Sky130 PDK
 
@@ -202,8 +202,295 @@ It can be used to **generate reports showing how the design and area are affecte
 
 
 
+
+
+
 Design Exploration is used to find the best configuration 
 
 
 
 <img width="436" height="252" alt="image" src="https://github.com/user-attachments/assets/d8d5542b-b7dc-46d9-b00f-dc95ac5f19a2" />
+
+
+
+
+
+***Regression Testing***
+
+
+<img width="875" height="480" alt="image" src="https://github.com/user-attachments/assets/d30b99da-43d1-4891-82cd-e4a32b683e4b" />
+
+
+Next step is design testing
+
+
+
+<img width="865" height="438" alt="image" src="https://github.com/user-attachments/assets/624aa87b-2ce8-495e-816d-014a1522b64f" />
+
+
+**Physical Implementation**
+
+
+Also called **Automated PnR (Place and Route)**
+
+* Floor/Power Planning
+* End Decoupling Capacitors and Tap Cells insertion
+* Placement: Global and Detailed
+* Post-placement optimization
+* Clock Tree Synthesis (CTS)
+* Routing: Global and Detailed
+
+**Logic Equivalence Check (LEC)**
+
+* Every time the netlist is modified, verification must be performed.
+
+  * CTS modifies the netlist.
+  * Post-placement optimizations modify the netlist.
+
+* LEC is used to formally confirm that the function did not change after modifying the netlist.
+
+
+**Static time analysis**
+
+<img width="751" height="440" alt="image" src="https://github.com/user-attachments/assets/0d55431b-6883-45e0-a2ad-6f24c5a794c8" />
+
+
+**Physical Verification – DRC & LVS**
+
+* Magic is used for **Design Rules Checking (DRC)** and **SPICE extraction from layout**.
+* Magic and Netgen are used for **LVS (Layout Versus Schematic)**.
+
+  * Extracted SPICE by Magic vs. Verilog netlist.
+
+
+### SKY_L1 - OpenLANE Directory structure in detail
+
+
+Openlane is not a tool its a flow which comprises of open source EDA tools 
+
+cd--changing the directory
+
+
+To locate the work/tools directory in the VSDSquadron Ubuntu environment:
+
+1. Open the terminal.
+
+2. Go to the home directory:
+cd
+
+3. List the contents:
+ls
+
+4. Enter the Desktop directory:
+cd Desktop
+
+5. Check its contents:
+ls
+
+6. Enter the work directory:
+cd work
+
+7. Check its contents:
+ls
+
+8. Enter the tools directory:
+cd tools
+
+9. Verify the current location:
+pwd
+
+Expected path:
+/home/vsduser/Desktop/work/tools
+
+Note: Make sure you are in the VSDSquadron environment, where the terminal prompt is:
+vsduser@vsdsquadron:~$
+
+
+pdk which we will be using is - skywater-130nm
+
+
+open pdk is the set of files which convert these foundry level pdks to be compatible with the open source EDA tools 
+
+sky130_fd_sc_hd ---> sky130-process name
+fd-skywater  foundry
+sc- standard cell
+hd- (high density)
+
+<img width="913" height="278" alt="image" src="https://github.com/user-attachments/assets/d513b35b-f153-4bb2-a2a6-a24d984776f0" />
+
+
+### SKY_L2 - Design Preparation Step
+
+
+OpenLane Docker Setup and Interactive Mode
+
+1. Navigate to the OpenLane directory:
+cd ~/Desktop/work/tools/openlane_working_dir/openlane
+
+2. Verify the current directory:
+pwd
+
+Expected output:
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane
+
+3. Check the contents of the OpenLane directory:
+ls
+
+The directory should contain files/directories such as:
+flow.tcl
+designs
+scripts
+configuration
+docker_build
+README.md
+
+4. Check the Docker configuration:
+type docker
+
+In this setup, Docker is configured as an alias that automatically runs:
+docker run -it -v $(pwd):/openLANE_flow -v $PDK_ROOT:$PDK_ROOT -e PDK_ROOT=$PDK_ROOT -u $(id -u $USER):$(id -g $USER) efabless/openlane:v0.21
+
+5. Check the available Docker images:
+\docker image ls
+
+The OpenLane image available in this setup is:
+efabless/openlane:v0.21
+
+Note:
+The instructor's system uses openlane:rc2, while this setup uses efabless/openlane:v0.21.
+
+6. Start the OpenLane Docker container:
+docker
+
+The terminal prompt should change to a container prompt such as:
+bash-4.1$
+
+7. Enter the mounted OpenLane directory:
+cd /openLANE_flow
+
+8. Verify the directory:
+pwd
+
+Expected output:
+/openLANE_flow
+
+9. List the OpenLane files:
+ls -ltr
+
+The output should contain files/directories such as:
+flow.tcl
+designs
+scripts
+configuration
+docker_build
+README.md
+
+10. Start OpenLane in interactive mode:
+./flow.tcl -interactive
+
+OpenLane should start and display information such as:
+[INFO]: OpenLane
+[INFO]: Version: ...
+
+The prompt will then change to:
+%
+
+This indicates that the OpenLane interactive mode has been successfully started.
+
+Overall flow:
+
+Host Ubuntu
+    ↓
+~/Desktop/work/tools/openlane_working_dir/openlane
+    ↓
+docker
+    ↓
+OpenLane Docker container
+    ↓
+/openLANE_flow
+    ↓
+./flow.tcl -interactive
+    ↓
+OpenLane interactive prompt (%)
+
+
+
+<img width="959" height="486" alt="image" src="https://github.com/user-attachments/assets/07a8b0d1-1994-421d-94dc-7372cb3e277c" />
+
+
+
+<img width="959" height="283" alt="image" src="https://github.com/user-attachments/assets/0acc88ca-50fc-4e5b-9b27-78ad68a6f635" />
+
+
+
+
+ <img width="959" height="445" alt="image" src="https://github.com/user-attachments/assets/4f5f5ed2-553c-4a3a-ae88-dc90d579a987" />
+
+
+
+ <img width="959" height="424" alt="image" src="https://github.com/user-attachments/assets/a7aa7fe8-02ef-430d-aa46-9293493da231" />
+
+
+
+<img width="959" height="449" alt="image" src="https://github.com/user-attachments/assets/f5f39a3d-78b0-45e7-975c-1ad65b08d997" />
+
+
+
+### SKY_L3 - Review files after design prep and run synthesis
+
+
+
+<img width="934" height="51" alt="image" src="https://github.com/user-attachments/assets/1f31fcd8-f689-46eb-b1c2-f99d126a8e6a" />
+
+
+
+<img width="934" height="106" alt="image" src="https://github.com/user-attachments/assets/5fef556a-aefb-48a4-b94d-fbef8f2c488a" />
+
+
+
+<img width="959" height="530" alt="image" src="https://github.com/user-attachments/assets/47c89477-500f-457d-8a57-74d68dc8b503" />
+
+
+Now the initial prep is done so we use the command 
+run_synthesis
+
+
+
+### SKY_L4 - OpenLANE Project Git Link Description
+
+https://github.com/The-OpenROAD-Project/OpenLane.git
+
+contains all the steps and working and design for the openlane
+
+
+### SKY_L5 - Steps to characterize synthesis results
+
+1) To find the flop ratio--> number of d ff
+
+
+
+<img width="387" height="400" alt="image" src="https://github.com/user-attachments/assets/16261242-3229-43de-ae37-55a48978eda4" />
+
+
+
+Total no of celss: 14876
+
+(1613/14876)=0.1084 approx 10 %
+
+
+
+<img width="911" height="289" alt="image" src="https://github.com/user-attachments/assets/ca2c1017-f80e-49bd-aa46-6bbb2836b346" />
+
+
+
+earlier we saw that the folder was empty but now we have synthesis.v file
+
+
+
+all the mappings have been done
+
+
+
+<img width="953" height="542" alt="image" src="https://github.com/user-attachments/assets/1c36c55f-9b56-4529-9fca-bc6f8914409d" />
+
+
