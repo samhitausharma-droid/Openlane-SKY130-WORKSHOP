@@ -584,3 +584,156 @@ Utilization factor is 0.25 suggest that the first netlist has only used 25% of t
 
 **Define the location of Pre paced cells**
 
+
+
+
+<img width="665" height="386" alt="image" src="https://github.com/user-attachments/assets/f0f16c66-b87d-4d84-b03e-d0789c8775d6" />
+
+
+
+### Reusability of IPs/Modules
+
+A large design can be divided into smaller blocks or modules and treated as separate IPs. Once a module is designed and verified, it can be reused multiple times in the same design or in different designs.
+
+For example, **Block 1** can be instantiated multiple times without redesigning its internal logic. Each instance can have different input and output signals.
+
+**Main advantage:**
+Design once → Verify once → Reuse multiple times.
+
+This saves **design time, verification effort, and development cost**, while also making the overall design more modular and easier to manage.
+
+
+
+<img width="868" height="528" alt="image" src="https://github.com/user-attachments/assets/deb77b57-5026-4bea-bee5-31557e2271ab" />
+
+
+
+### SKY_L3 - De-coupling capacitors
+
+**Define the location of the pre paced cells**
+
+
+<img width="863" height="548" alt="image" src="https://github.com/user-attachments/assets/48171e35-c1dc-4e1b-9338-43102361de4f" />
+
+
+We need to surround them with decoupling capacitors
+
+
+<img width="959" height="558" alt="image" src="https://github.com/user-attachments/assets/7513c966-3a58-42b3-bdf1-37a150489094" />
+
+
+
+<img width="731" height="394" alt="image" src="https://github.com/user-attachments/assets/56fe5316-4e47-4a09-9424-415e4fcde132" />
+
+
+decoupling capacitor is a huge capacitor which is filled with charge lets say whenever the circuit switches on it
+gets current through the capacitor , this capacitor **decouples** the main circuit
+
+
+Switching activity--> capacitor loose the charge to the circuit
+No switching activity-->capacitor replenishes the charge 
+
+
+<img width="739" height="569" alt="image" src="https://github.com/user-attachments/assets/80c2da82-9b21-4c0f-8420-b01a51916bc8" />
+
+
+now there is no problem of **cross talk**
+
+### SKY_L4 - Power planning
+ 
+
+Since we dont have any decoupling capacitor in this region the power supply is the one who has to supply power to that complete line
+
+
+<img width="745" height="492" alt="image" src="https://github.com/user-attachments/assets/fde6916a-feb2-451e-aa54-b0fc679f382d" />
+
+
+1--> charged  to VDD
+0--> discharged to ground
+
+
+
+<img width="629" height="389" alt="image" src="https://github.com/user-attachments/assets/a79b2e5e-91c6-4d1b-81ee-8dfb5ead8deb" />
+
+
+now we will connect it to an invertor 
+
+
+<img width="713" height="264" alt="image" src="https://github.com/user-attachments/assets/1e3652d8-a704-4bdf-9554-ceac2d7e6eb1" />
+
+
+**Ground bounce** is the unwanted rise in the ground voltage caused by a sudden large current flowing through the parasitic resistance and inductance of the ground path.
+
+In simple words:
+
+ **When many circuits switch at the same time, a sudden current flows through the ground path, causing the ground voltage to temporarily rise. This is called ground bounce.**
+
+
+
+ <img width="734" height="268" alt="image" src="https://github.com/user-attachments/assets/3632d569-b1b7-4d79-a005-8ea3cc714b7f" />
+
+
+
+**Voltage droop** is the temporary **drop in the supply voltage** when a circuit suddenly demands a large amount of current.
+
+In simple words:
+
+**When many circuits switch at once, the sudden current through the power-delivery path causes the supply voltage to temporarily decrease. This is called voltage droop.**
+
+
+If there were power supplies all over the places these problems would not have hapend
+
+
+
+<img width="740" height="518" alt="image" src="https://github.com/user-attachments/assets/aec97f7e-364a-4b5a-994e-3703b93abc42" />
+
+**instead of a single power supply**
+
+
+
+<img width="730" height="521" alt="image" src="https://github.com/user-attachments/assets/4aaa9fff-e19f-4c3a-8775-68ed7de299e5" />
+
+
+
+**we connect multiple power supplies**
+
+
+<img width="781" height="394" alt="image" src="https://github.com/user-attachments/assets/d2acae8f-58a4-4232-ba16-134f31fe43e3" />
+
+
+**This is how we do power planning***
+
+
+### SKY_L5 - Pin placement and logical cell placement blockage
+
+
+<img width="812" height="542" alt="image" src="https://github.com/user-attachments/assets/3a157935-07fe-413f-8541-3be92638714b" />
+
+
+
+**COMPLETE DESIGN**
+
+
+<img width="635" height="424" alt="image" src="https://github.com/user-attachments/assets/3f485ea8-8081-4824-a7f2-15481bc070a3" />
+
+
+<img width="663" height="394" alt="image" src="https://github.com/user-attachments/assets/e48bcace-b1f5-498f-bd81-14726c62aa74" />
+
+
+We need to be smart in placing the pins 
+
+We need to block the area this make sure that the placement tool doesn't place anything on that area which is reserved for pins 
+
+
+### SKY_L6 - Steps to run floorplan using OpenLANE
+
+
+<img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/ac9cfd0e-8ffd-4926-b662-f3d1b0ac3051" />
+
+
+<img width="959" height="544" alt="image" src="https://github.com/user-attachments/assets/dcc25e75-bd51-43f7-863c-32d167cd53da" />
+
+
+### SKY_L7 - Review floorplan files and steps to view floorplanSKY_L7 
+
+
