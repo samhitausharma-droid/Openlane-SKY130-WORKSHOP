@@ -494,3 +494,93 @@ all the mappings have been done
 <img width="953" height="542" alt="image" src="https://github.com/user-attachments/assets/1c36c55f-9b56-4529-9fca-bc6f8914409d" />
 
 
+<img width="959" height="541" alt="image" src="https://github.com/user-attachments/assets/0c9bf617-a41c-409e-8628-f21b0bdb55ab" />
+
+
+This is what we had got 
+
+
+### Sky130 Day 2 - Good floorplan vs bad floorplan and introduction to library cells
+
+
+### SKY_L1 - Utilization factor and aspect ratio
+
+
+First step of floor planning is defining the length and width of core and die
+
+
+<img width="562" height="387" alt="image" src="https://github.com/user-attachments/assets/f016d81f-25e7-4472-baa5-c1c2e1925808" />
+
+
+
+<img width="746" height="348" alt="image" src="https://github.com/user-attachments/assets/5966892c-6fa7-4c58-bf81-ff8e3a4e0b0e" />
+
+
+
+we are only interested in the width of the logic gates and ff 
+
+
+
+<img width="959" height="521" alt="image" src="https://github.com/user-attachments/assets/29c13665-bdb9-4498-ba78-b8819871ea88" />
+
+
+<img width="530" height="308" alt="image" src="https://github.com/user-attachments/assets/ae2ecc21-f0c2-4387-819c-5f99908df637" />
+
+
+Yep bro 😭 here’s a clean **copy-paste version for your documentation**:
+
+### Core and Die
+
+**Die:**
+A die is the actual piece of semiconductor material, usually silicon, on which the integrated circuit (IC) is fabricated. A single silicon wafer contains many dies, which are separated and then packaged to form individual chips.
+
+**Core:**
+The core is the main area within the die where the actual circuit design is implemented. It contains the logic cells, memory elements, and other circuit components required for the functionality of the design.
+
+**In simple terms:**
+
+* **Wafer** → contains multiple dies
+* **Die** → the complete piece of silicon containing the chip
+* **Core** → the main circuit area inside the die
+* **Package** → protects the die and provides connections to the outside world.
+
+
+the netlist which was of 4 sq units occupies the complete area of the core 
+
+
+<img width="863" height="410" alt="image" src="https://github.com/user-attachments/assets/232d4166-ddbc-473d-908e-f232e0c9e691" />
+
+
+we have utilized the core 100 % 
+
+
+
+<img width="592" height="241" alt="image" src="https://github.com/user-attachments/assets/e2b44282-00e0-4256-a3fd-15a8c3f38227" />
+
+
+**Practically we go for 50-60% utilization**
+
+
+
+**Aspect Ratio = Height / Width = 2 unit / 2 unit = 1**
+
+
+Whenever the **ASPECT RATIO** is **1** it signifies that the chip is a **SQUARE** shape 
+
+
+<img width="941" height="574" alt="image" src="https://github.com/user-attachments/assets/a0243cf1-5df8-45be-9df9-a2c7ba0525fb" />
+
+
+
+### SKY_L2 - Concept of pre-placed cells
+
+
+<img width="914" height="578" alt="image" src="https://github.com/user-attachments/assets/39f2202d-3db5-4cde-bc07-708367705613" />
+
+
+
+Utilization factor is 0.25 suggest that the first netlist has only used 25% of the core
+
+
+**Define the location of Pre paced cells**
+
