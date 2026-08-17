@@ -1,8 +1,12 @@
-<img width="748" height="245" alt="image" src="https://github.com/user-attachments/assets/f18cfa23-34aa-4036-a1a0-8d33ed9ca54a" /># Openlane-SKY130-WORKSHOP
+
+# Openlane-SKY130-WORKSHOP
+
+<img width="748" height="245" alt="image" src="https://github.com/user-attachments/assets/f18cfa23-34aa-4036-a1a0-8d33ed9ca54a" />
+
 
 ### Sky130 Day 1 - Inception of open-source EDA, OpenLANE and Sky130 PDK
 
-### SKY_L1 - Introduction to QFN-48 Package, chip, pads, core, die and IPs
+
 
 
 <img width="407" height="332" alt="image" src="https://github.com/user-attachments/assets/bf21acff-92c9-4a71-9308-8b795e47d5aa" />
@@ -34,14 +38,12 @@ Core is a place where all the digital logic sits
 
 
 
-### SKY_L2 - Introduction to RISC-V
 
 
 <img width="953" height="565" alt="image" src="https://github.com/user-attachments/assets/af3b4e16-8fc2-4ff4-9607-cf0e245eafe0" />
 
 
 
-### SKY_L3 - From Software Applications to Hardware
 
 
 converting the inputs into the desired hardware language is the job of the **COMPILER**
@@ -61,7 +63,6 @@ Basic Flowchart
 <img width="953" height="568" alt="image" src="https://github.com/user-attachments/assets/47dd9059-d675-4d03-a8eb-57835256f273" />
 
 
-### SKY_L1 - Introduction to all components of open-source digital asic design
 
 <img width="863" height="467" alt="image" src="https://github.com/user-attachments/assets/dc960992-1736-4e85-8d8f-613df448eada" />
 
@@ -77,7 +78,6 @@ as a result google released the **first opensource pdk**
 <img width="527" height="494" alt="image" src="https://github.com/user-attachments/assets/391a85fa-d012-4501-82bd-51277ce9680f" />
 
 
-### SKY_L2 - Simplified RTL2GDS flow
 
 <img width="890" height="485" alt="image" src="https://github.com/user-attachments/assets/0912d469-a7d5-438a-b6bf-de9141ebd852" />
 
@@ -177,7 +177,7 @@ Floor planning has 2 types the CHIP FLOOR PLANNING & MACRO FLOOR PLANNING
 6) More will be added soon
 
 
-### SKY_L4 - Introduction to OpenLANE detailed ASIC design flow
+
 
 
 
@@ -263,7 +263,7 @@ Also called **Automated PnR (Place and Route)**
   * Extracted SPICE by Magic vs. Verilog netlist.
 
 
-### SKY_L1 - OpenLANE Directory structure in detail
+
 
 
 Openlane is not a tool its a flow which comprises of open source EDA tools 
@@ -319,7 +319,7 @@ hd- (high density)
 <img width="913" height="278" alt="image" src="https://github.com/user-attachments/assets/d513b35b-f153-4bb2-a2a6-a24d984776f0" />
 
 
-### SKY_L2 - Design Preparation Step
+
 
 
 OpenLane Docker Setup and Interactive Mode
@@ -456,14 +456,12 @@ run_synthesis
 
 
 
-### SKY_L4 - OpenLANE Project Git Link Description
 
 https://github.com/The-OpenROAD-Project/OpenLane.git
 
 contains all the steps and working and design for the openlane
 
 
-### SKY_L5 - Steps to characterize synthesis results
 
 1) To find the flop ratio--> number of d ff
 
@@ -503,7 +501,6 @@ This is what we had got
 ### Sky130 Day 2 - Good floorplan vs bad floorplan and introduction to library cells
 
 
-### SKY_L1 - Utilization factor and aspect ratio
 
 
 First step of floor planning is defining the length and width of core and die
@@ -571,7 +568,7 @@ Whenever the **ASPECT RATIO** is **1** it signifies that the chip is a **SQUARE*
 
 
 
-### SKY_L2 - Concept of pre-placed cells
+
 
 
 <img width="914" height="578" alt="image" src="https://github.com/user-attachments/assets/39f2202d-3db5-4cde-bc07-708367705613" />
@@ -607,7 +604,6 @@ This saves **design time, verification effort, and development cost**, while als
 
 
 
-### SKY_L3 - De-coupling capacitors
 
 **Define the location of the pre paced cells**
 
@@ -638,7 +634,7 @@ No switching activity-->capacitor replenishes the charge
 
 now there is no problem of **cross talk**
 
-### SKY_L4 - Power planning
+
  
 
 Since we dont have any decoupling capacitor in this region the power supply is the one who has to supply power to that complete line
@@ -703,8 +699,6 @@ If there were power supplies all over the places these problems would not have h
 **This is how we do power planning***
 
 
-### SKY_L5 - Pin placement and logical cell placement blockage
-
 
 <img width="812" height="542" alt="image" src="https://github.com/user-attachments/assets/3a157935-07fe-413f-8541-3be92638714b" />
 
@@ -724,7 +718,7 @@ We need to be smart in placing the pins
 We need to block the area this make sure that the placement tool doesn't place anything on that area which is reserved for pins 
 
 
-### SKY_L6 - Steps to run floorplan using OpenLANE
+
 
 
 <img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/ac9cfd0e-8ffd-4926-b662-f3d1b0ac3051" />
@@ -732,17 +726,16 @@ We need to block the area this make sure that the placement tool doesn't place a
 
 <img width="959" height="544" alt="image" src="https://github.com/user-attachments/assets/dcc25e75-bd51-43f7-863c-32d167cd53da" />
 
-
-### SKY_L7 - Review floorplan files and steps to view floorplanSKY_L7 
+ 
 
 to do 
 
-### SKY_L8 - Review floorplan layout in Magic
+
 
 to do
 
 
-### SKY_L1 - Netlist binding and initial place design
+
 
 
 
@@ -773,7 +766,7 @@ mostly all the information of the particular gates
 <img width="845" height="401" alt="image" src="https://github.com/user-attachments/assets/f1b50b38-e081-4235-8240-dbc6d1882cb6" />
 
 
-### SKY_L2 - Optimize placement using estimated wire-length and capacitance
+
 
 
 We need to use optimized placement
@@ -791,8 +784,6 @@ for this we dont need any buffers as the capacitance is enough and the signals a
 **Here the long distance has been cut to short distance using buffer**
 
 
-### SKY_L3 - Final placement optimization
-
 
 <img width="762" height="397" alt="image" src="https://github.com/user-attachments/assets/b8c42b61-1c2d-47eb-9d99-bae1b13963f7" />
 
@@ -800,7 +791,7 @@ for this we dont need any buffers as the capacitance is enough and the signals a
 <img width="772" height="373" alt="image" src="https://github.com/user-attachments/assets/625f54cd-d661-4b3a-84c2-5c09ce887588" />
 
 
-### SKY_L4 - Need for libraries and characterization
+
 
 
 <img width="932" height="443" alt="image" src="https://github.com/user-attachments/assets/5224af13-902b-4f0e-b4aa-a5e47ce2f143" />
