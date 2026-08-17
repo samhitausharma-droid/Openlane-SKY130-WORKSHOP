@@ -735,4 +735,83 @@ We need to block the area this make sure that the placement tool doesn't place a
 
 ### SKY_L7 - Review floorplan files and steps to view floorplanSKY_L7 
 
+to do 
+
+### SKY_L8 - Review floorplan layout in Magic
+
+to do
+
+
+### SKY_L1 - Netlist binding and initial place design
+
+
+
+In real world we dont have shapes like this we only have squares and rectangles 
+
+each component of the netlist has been given proper height and width 
+
+
+
+<img width="653" height="413" alt="image" src="https://github.com/user-attachments/assets/c848fb8b-b640-4fa5-b236-258635350b80" />
+
+
+
+Library consists of width,height,delay information of the cells
+
+mostly all the information of the particular gates 
+
+
+
+
+<img width="819" height="389" alt="image" src="https://github.com/user-attachments/assets/f4aa59a3-cfd5-4cdd-a742-a13a4a718eae" />
+
+
+
+<img width="858" height="380" alt="image" src="https://github.com/user-attachments/assets/20093705-817b-4112-8a1c-8bef20ae6928" />
+
+
+<img width="845" height="401" alt="image" src="https://github.com/user-attachments/assets/f1b50b38-e081-4235-8240-dbc6d1882cb6" />
+
+
+### SKY_L2 - Optimize placement using estimated wire-length and capacitance
+
+
+We need to use optimized placement
+
+we need buffers and repeaters 
+
+<img width="529" height="87" alt="image" src="https://github.com/user-attachments/assets/21999c67-8ed9-41a4-8eab-bca05f116d0e" />
+
+for this we dont need any buffers as the capacitance is enough and the signals are very easily receivable 
+
+
+<img width="401" height="61" alt="image" src="https://github.com/user-attachments/assets/175905fd-7bdb-4ce7-a57e-c6cd78d6666f" />
+
+
+**Here the long distance has been cut to short distance using buffer**
+
+
+### SKY_L3 - Final placement optimization
+
+
+<img width="762" height="397" alt="image" src="https://github.com/user-attachments/assets/b8c42b61-1c2d-47eb-9d99-bae1b13963f7" />
+
+
+<img width="772" height="373" alt="image" src="https://github.com/user-attachments/assets/625f54cd-d661-4b3a-84c2-5c09ce887588" />
+
+
+### SKY_L4 - Need for libraries and characterization
+
+
+<img width="932" height="443" alt="image" src="https://github.com/user-attachments/assets/5224af13-902b-4f0e-b4aa-a5e47ce2f143" />
+
+
+<img width="551" height="330" alt="image" src="https://github.com/user-attachments/assets/91de38fd-3814-43c7-991f-05f1b688d9b1" />
+
+
+### SKY_L5 - Congestion aware placement using RePlAce
+
+**congestion related placement***
+
+legalization --> standard cells should be exactly in the rows specified and should not overlap
 
