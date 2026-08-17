@@ -527,7 +527,6 @@ we are only interested in the width of the logic gates and ff
 <img width="530" height="308" alt="image" src="https://github.com/user-attachments/assets/ae2ecc21-f0c2-4387-819c-5f99908df637" />
 
 
-Yep bro 😭 here’s a clean **copy-paste version for your documentation**:
 
 ### Core and Die
 
