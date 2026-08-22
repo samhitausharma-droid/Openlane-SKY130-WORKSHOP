@@ -806,3 +806,55 @@ for this we dont need any buffers as the capacitance is enough and the signals a
 
 legalization --> standard cells should be exactly in the rows specified and should not overlap
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Sky130 Day 3 - Design library cell using Magic Layout and ngspice characterization
+
+
+
+<img width="783" height="348" alt="image" src="https://github.com/user-attachments/assets/d41b9bc6-c13e-4427-8015-cd45cc8f6af7" />
+
+
+
+pins are equidistant
+
+<img width="959" height="515" alt="image" src="https://github.com/user-attachments/assets/dbd6a185-5a42-44b4-8913-71d5f63b6397" />
+
+
+<img width="793" height="441" alt="image" src="https://github.com/user-attachments/assets/e12139ac-8adb-4dad-a7f3-02096be56baa" />
+
+**this is a hungarian io pin**
+
+
+**pins have been stacked upon eachother**
+
+we reset the variables to make change in openlane
+
+
+The rest of theory on CMOS was learnt in the previous course :: CMOS CIRCUIT DESIGN
+
+Ref for the previous course 
+https://github.com/samhitausharma-droid/CMOS-Circuit-Design-SKY130
+
+
+![Uploading image.png…]()
+
+
+
+### SKY_L1 - Create Active regions
+
