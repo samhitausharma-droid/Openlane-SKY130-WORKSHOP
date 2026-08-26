@@ -858,3 +858,7 @@ https://github.com/samhitausharma-droid/CMOS-Circuit-Design-SKY130
 
 ### SKY_L1 - Create Active regions
 
+
+
+
+
