@@ -852,11 +852,11 @@ Ref for the previous course
 https://github.com/samhitausharma-droid/CMOS-Circuit-Design-SKY130
 
 
-![Uploading image.png…]()
+<img width="494" height="368" alt="image" src="https://github.com/user-attachments/assets/c1c30863-acf1-49b7-be17-c484981b77d0" />
 
 
 
-### SKY_L1 - Create Active regions
+
 
 
 <img width="761" height="91" alt="Screenshot 2026-08-26 191153" src="https://github.com/user-attachments/assets/0ac3f0f9-060c-4782-8c16-fed557413a9a" />
@@ -875,6 +875,115 @@ https://github.com/samhitausharma-droid/CMOS-Circuit-Design-SKY130
 
 
 <img width="755" height="257" alt="Screenshot 2026-08-26 194115" src="https://github.com/user-attachments/assets/84e0c3a0-cb1e-4943-ab49-4074aa88446b" />
+
+
+<img width="562" height="350" alt="image" src="https://github.com/user-attachments/assets/d3cb3454-60dc-40a9-8a9c-2494d4ada311" />
+
+
+
+<img width="278" height="182" alt="image" src="https://github.com/user-attachments/assets/8d353de4-a6a8-472c-90c3-dde2f0bd5b2f" />
+
+
+# Characterization of the Cell
+
+Cell characterization is the process of determining the important timing parameters of the designed CMOS inverter. The three main parameters are Rise Time, Fall Time, and Propagation Delay.
+
+## 1. Rise Time
+
+Rise time is the time taken by the output signal to transition from 20% to 80% of its maximum voltage.
+
+For a maximum voltage of 3.3 V:
+
+* 20% of VDD = 0.66 V
+* 80% of VDD = 2.64 V
+
+From the waveform:
+
+* At 0.66 V → t = 6.1615 ns
+* At 2.64 V → t = 6.20388 ns
+
+Therefore,
+
+tr = 6.20388 - 6.1615
+
+tr ≈ 0.04238 ns
+
+Therefore, the rise time is approximately 42.38 ps.
+
+## 2. Fall Time
+
+Fall time is the time taken by the output signal to transition from 80% to 20% of VDD.
+
+For VDD = 3.3 V:
+
+* 80% of VDD = 2.64 V
+* 20% of VDD = 0.66 V
+
+From the waveform:
+
+* At 2.64 V → t = 4.0402 ns
+* At 0.66 V → t = 4.068 ns
+
+Therefore,
+
+tf = 4.068 - 4.0402
+
+tf ≈ 0.0278 ns
+
+Therefore, the fall time is approximately 27.8 ps.
+
+## 3. Propagation Delay
+
+Propagation delay is the time difference between the 50% VDD crossing of the input and the corresponding 50% VDD crossing of the output.
+
+Since VDD = 3.3 V,
+
+50% of VDD = 1.65 V
+
+Using the plot cursor, the threshold-crossing points were measured as:
+
+Input:
+Time = 2.14998 ns
+Voltage = 1.65008 V
+
+Output:
+Time = 2.18598 ns
+Voltage = 1.65001 V
+
+Therefore,
+
+tpd = t(output @ 50%) - t(input @ 50%)
+
+tpd = 2.18598 ns - 2.14998 ns
+
+tpd = 0.036 ns
+
+Therefore, the propagation delay is approximately 36 ps for the shown transition.
+
+Note: A different transition of the waveform gave a propagation delay of 0.03357 ns (33.57 ps). This difference occurs because the measurements were taken from different input/output transitions. For the threshold-crossing example shown here, the propagation delay is 0.036 ns.
+
+## Key Takeaways
+
+* Rise time = 0.04238 ns (42.38 ps)
+* Fall time = 0.0278 ns (27.8 ps)
+* Propagation delay = 0.036 ns (36 ps) for the shown transition.
+* The output correctly follows the inverse of the input, confirming the expected CMOS inverter behavior.
+* Propagation delay indicates how quickly the inverter responds to an input transition and is important for determining the switching speed and timing performance of the standard cell.
+* Layout-extracted parasitics make the SPICE simulation more representative of the actual layout implementation rather than an ideal schematic.
+* The PMOS is made slightly wider than the NMOS to compensate for the lower hole mobility and help balance the pull-up and pull-down strengths.
+
+
+### Sky130 Day 4 - Pre-layout timing analysis and importance of good clock tree
+
+
+Our objective is to extract the lef file 
+
+
+<img width="278" height="182" alt="image" src="https://github.com/user-attachments/assets/b7f70b1c-3cd0-405d-b345-193e28477e86" />
+
+Track = a routing lane for wires.
+
+**the width must be odd multiples of the x pitch**
 
 
 
