@@ -987,4 +987,18 @@ Track = a routing lane for wires.
 
 
 
+<img width="959" height="552" alt="image" src="https://github.com/user-attachments/assets/fdc6a63d-24f3-4c37-874c-628b1ae2c2c8" />
+
+
+**next step would be to plug the file into picorv32a**
+
+
+<img width="950" height="525" alt="image" src="https://github.com/user-attachments/assets/117e20be-22cc-4e9a-abc3-279469875597" />
+
+
+<img width="959" height="484" alt="image" src="https://github.com/user-attachments/assets/8ad6dbf4-1476-4679-8636-49cfba79c898" />
+
+
+
+
 
