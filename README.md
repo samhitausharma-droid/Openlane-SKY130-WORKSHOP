@@ -999,6 +999,111 @@ Track = a routing lane for wires.
 <img width="959" height="484" alt="image" src="https://github.com/user-attachments/assets/8ad6dbf4-1476-4679-8636-49cfba79c898" />
 
 
+CLOCK TREE SYNTHESIS (CTS)
 
+CTS is the process of building a clock distribution network using buffers so that the clock signal reaches all flip-flops with minimum skew.
+
+Example:
+
+                    Clock
+                      |
+                   Buffer 1
+                      |
+                      A
+                   /     \
+              Buffer 2   Buffer 2
+                 |           |
+                 B           C
+               /   \       /   \
+             C1    C2    C3    C4
+
+There are 2 levels of buffering:
+
+Level 1:
+- The first buffer drives two buffers.
+- The two buffers are identical.
+
+Level 2:
+- Each Level-2 buffer drives two output loads.
+- The buffers at the same level are identical.
+
+Assume:
+C1 = C2 = C3 = C4 = 25 fF
+Cbuf1 = Cbuf2 = 30 fF
+
+Capacitance at node A:
+Node A drives two buffers, each having 30 fF input capacitance.
+
+Therefore,
+C(A) = Cbuf1 + Cbuf2
+     = 30 + 30
+     = 60 fF
+
+Capacitance at node B:
+Node B drives C1 and C2.
+
+Therefore,
+C(B) = C1 + C2
+     = 25 + 25
+     = 50 fF
+
+Capacitance at node C:
+Node C drives C3 and C4.
+
+Therefore,
+C(C) = C3 + C4
+     = 25 + 25
+     = 50 fF
+
+
+DELAY TABLE
+
+The delay table of a standard-cell buffer gives the delay of the buffer for different:
+
+1. Input slew
+2. Output load capacitance
+
+The delay is determined using:
+
+Input Slew + Output Load → Buffer Delay
+
+For example, if the input slew is 40 ps and the output load is 50 fF, the library delay table is used to find the corresponding buffer delay.
+
+
+POWER-AWARE CTS
+
+CTS does not only try to minimize clock skew. It also considers power consumption.
+
+Larger buffers:
+- Can drive larger loads
+- Improve slew and timing
+- Consume more power
+- Occupy more area
+
+Smaller buffers:
+- Consume less power
+- Occupy less area
+- May have worse slew and timing
+
+Therefore, power-aware CTS tries to balance:
+
+Timing + Clock Skew + Power + Area
+
+
+KEY POINT:
+
+CTS builds a balanced clock tree so that the clock reaches all sequential elements with minimum skew.
+
+Capacitance at a node = Sum of the capacitances directly driven by that node.
+
+Buffer delay depends mainly on:
+Input Slew + Output Load Capacitance
+
+
+<img width="959" height="583" alt="image" src="https://github.com/user-attachments/assets/1f8c9f0a-4976-46ee-9b52-6bab5eeb8585" />
+
+
+
+<img width="958" height="599" alt="image" src="https://github.com/user-attachments/assets/0cdd9d4b-6802-4525-b763-960cbbcfec07" />
 
 
