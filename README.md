@@ -1107,3 +1107,10 @@ Input Slew + Output Load Capacitance
 <img width="958" height="599" alt="image" src="https://github.com/user-attachments/assets/0cdd9d4b-6802-4525-b763-960cbbcfec07" />
 
 
+
+
+
+
+
+
+
