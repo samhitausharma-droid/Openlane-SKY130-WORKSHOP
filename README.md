@@ -436,7 +436,7 @@ OpenLane interactive prompt (%)
 
 
 
-### SKY_L3 - Review files after design prep and run synthesis
+
 
 
 
@@ -728,11 +728,6 @@ We need to block the area this make sure that the placement tool doesn't place a
 
  
 
-to do 
-
-
-
-to do
 
 
 
@@ -800,7 +795,7 @@ for this we dont need any buffers as the capacitance is enough and the signals a
 <img width="551" height="330" alt="image" src="https://github.com/user-attachments/assets/91de38fd-3814-43c7-991f-05f1b688d9b1" />
 
 
-### SKY_L5 - Congestion aware placement using RePlAce
+
 
 **congestion related placement***
 
