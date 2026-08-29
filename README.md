@@ -1107,9 +1107,183 @@ Input Slew + Output Load Capacitance
 <img width="958" height="599" alt="image" src="https://github.com/user-attachments/assets/0cdd9d4b-6802-4525-b763-960cbbcfec07" />
 
 
+<img width="542" height="394" alt="image" src="https://github.com/user-attachments/assets/3f769b3a-176d-4fdb-9e9f-1d7414032d4e" />
 
 
 
+
+<img width="553" height="310" alt="image" src="https://github.com/user-attachments/assets/c53bb595-4f51-42a2-bc61-1eaec796a64e" />
+
+
+
+1. **Setup time** is the minimum time data must be stable before the capture clock edge.
+2. Data is launched from the **launch flop** at the clock edge.
+3. It passes through the **combinational logic** and reaches the capture flop.
+4. Data must arrive **before the next clock edge** by at least the setup time.
+5. Setup condition: **Tclk ≥ Tcq + Tcomb + Tsetup**.
+
+
+
+<img width="731" height="263" alt="image" src="https://github.com/user-attachments/assets/430a637b-b275-49b2-b175-20b80838e09a" />
+
+
+<img width="959" height="599" alt="image" src="https://github.com/user-attachments/assets/98bfd65b-0169-405f-9a82-466cdd6cad39" />
+
+
+<img width="791" height="369" alt="image" src="https://github.com/user-attachments/assets/c9197b71-39e4-494c-8018-039261d3c5c9" />
+
+
+
+1. **Clock Tree Synthesis (CTS)** distributes the clock signal from the source to all flip-flops.
+2. It inserts **clock buffers/inverters** to drive the clock properly.
+3. CTS tries to make the clock arrival time at different flip-flops as equal as possible.
+4. This reduces **clock skew**, which can cause setup and hold violations.
+5. The final goal is a **balanced clock tree** with proper timing and minimal delay.
+
+
+<img width="807" height="387" alt="image" src="https://github.com/user-attachments/assets/e60591ac-d9d4-4cdd-b504-413e35e83138" />
+
+
+<img width="660" height="470" alt="image" src="https://github.com/user-attachments/assets/e393c450-88e0-4c2d-b4f8-f72e62f17098" />
+
+
+1. **Crosstalk** between nearby wires can change the delay of a signal.
+2. Before crosstalk, the delay is **D**; after crosstalk, it becomes **D + Δ**.
+3. This extra delay **Δ** shifts the clock arrival time.
+4. Different clock paths experience different delays, creating **clock skew**.
+5. Therefore, crosstalk can cause **setup/hold timing violations**.
+
+
+
+<img width="959" height="530" alt="image" src="https://github.com/user-attachments/assets/02277c1f-4d26-4980-b0b5-4639eace03d0" />
+
+
+<img width="321" height="312" alt="image" src="https://github.com/user-attachments/assets/3a81a3da-d626-4ff6-ac75-0d21405f2a24" />
+
+
+A summary of everything 
+
+including ### 
+
+* **Clock Tree Synthesis (CTS)** is basically the stage where we make sure the clock reaches all the flip-flops in a controlled and balanced way. Before CTS, the clock is treated as an ideal signal, but in the actual chip the clock has to travel through physical wires and buffers, so different flip-flops can receive it at different times.
+
+* CTS solves this by building a **clock distribution tree** from the main clock source to all the sequential elements. It adds clock buffers at different points in the design so that one clock signal can drive thousands of flip-flops without excessive delay or signal degradation.
+
+* The important thing here is **clock skew**. Skew is the difference between the clock arrival times at two different flip-flops. Ideally, we want the clock to reach all the flip-flops at nearly the same time because large skew can create **setup and hold timing problems**.
+
+* In this flow, the important CTS variables were checked first, such as `CTS_CLK_BUFFER_LIST`, `CTS_ROOT_BUFFER`, `SYNTH_MAX_TRAN` and `CTS_MAX_CAP`. These variables basically tell OpenLane/OpenROAD which clock buffers can be used and what electrical limits should be maintained. 
+
+* The `CTS_CLK_BUFFER_LIST` contained `clkbuf_1`, `clkbuf_2`, `clkbuf_4` and `clkbuf_8`. The smallest buffer, `clkbuf_1`, was temporarily removed before CTS. This leaves the stronger buffers available for building the clock tree. 
+
+* The root of the clock tree used `clkbuf_16`. This makes sense because the root buffer has to drive a very large amount of downstream clock load, so a stronger buffer is useful there. 
+
+* CTS was then executed using `run_cts`. After completion, the generated CTS DEF was loaded back into OpenROAD along with the LEF, Liberty file, netlist and SDC constraints. This was done to verify that the CTS result could be read correctly and timing could be checked on it. 
+
+* One very noticeable change after CTS was the **increase in component count**. The design went from about **21,699 components before CTS to 29,412 after CTS**. This huge increase is mainly because CTS inserted a large number of clock buffers and clock nets. 
+
+* For the hold check, the reported slack was **+0.25**, which means the path passed the hold requirement. A positive slack means the timing requirement is satisfied. 
+
+* The setup check was also clean, with a **slack of 10.15** and `WNS = 0.00`, `TNS = 0.00`. So after CTS, there were no setup timing violations in the reported analysis. 
+
+* The clock skew report showed a skew of about **3.87** for the checked clock paths. The main idea is that CTS has now replaced the ideal clock assumption with an actual clock network containing buffers and delays. 
+
+* After CTS was finished, `clkbuf_1` was added back to the buffer list. So the configuration was restored to the original four-buffer list. This doesn't mean CTS suddenly uses the buffer again for the already completed tree; it restores the environment for later stages. 
+
+* The next major step is **PDN generation**. PDN stands for **Power Distribution Network**. Basically, before we start routing all the signal connections, we need to create the VDD and GND network that supplies power to the standard cells.
+
+* PDN has to be present before routing because the power grid occupies physical metal resources. The signal router has to work around these fixed power structures instead of routing signals through them. Also, without a proper power network, the cells cannot actually receive their required power in the final chip. 
+
+* Before generating the PDN, `CURRENT_DEF` was pointed to the **floorplan DEF**. This is important because PDN is generated on top of the floorplanned design, before the later placement and routing details are added. 
+
+* After that, routing was performed using `run_routing`. The router connects the signal nets between all the cells while respecting the existing placement and power structures.
+
+* The final routed design had a total wire length of approximately **1,325,012 µm**. Most of the wiring was on `met1` and `met2`, with additional routing on `met3`, `met4` and the other layers. There were also around **179,133 vias** used to make connections between different metal layers. 
+
+* The really important result here is **zero DRC violations after detailed routing**. DRC means **Design Rule Check**. It verifies things such as spacing, width and other manufacturing-related physical rules. Zero violations means the routed layout passed the router's detailed design-rule checks. 
+
+* After routing, we cannot just assume that timing is still perfect because real wires introduce **resistance and capacitance**. So the next step is **parasitic extraction**.
+
+* During SPEF extraction, the routed LEF and DEF information is processed to calculate the parasitic effects of the physical interconnect. The extracted information is stored in a **SPEF file**, which can then be used during static timing analysis. 
+
+* OpenSTA then performs **post-route Static Timing Analysis (STA)** using the routed design and extracted parasitics. This gives a much more realistic timing picture than the earlier ideal-clock analysis because now the physical wire delays are included.
+
+* The final reported result was **WNS = 0.00 and TNS = 0.00**. So the routed design remained timing-clean after parasitic extraction. 
+
+* Finally, the design moves toward **GDSII generation**. GDSII is basically the final physical layout database that represents the shapes, layers, cells, wires and other information needed for fabrication.
+
+* The generated GDS was opened in **Magic** using the Sky130A technology file. This allows us to visually inspect the final layout and see the standard cells, metal layers, vias and filler cells. 
+
+* After this, the main sign-off checks are **final DRC, LVS, parasitic extraction/STA and GDSII sign-off**. LVS is especially important because it checks whether the physical layout actually corresponds to the intended circuit/netlist.
+
+* So the overall flow is basically: **CTS → balanced clock network → PDN → signal routing → parasitic extraction → post-route STA → GDSII → final sign-off**. The nice part is that each stage is building on the previous one: first we make the clock physically realistic, then provide power, then connect everything, then account for real wire effects, and finally prepare the layout for fabrication. 
+
+
+<img width="536" height="354" alt="image" src="https://github.com/user-attachments/assets/2634491b-1559-4cf6-a28b-17fe87aae17c" />
+
+
+
+<img width="757" height="378" alt="image" src="https://github.com/user-attachments/assets/21807947-dd12-477c-ab7b-6be94c4bf3c7" />
+
+
+
+
+
+* **Routing** is the stage where all the placed cells/pins in the chip are physically connected using metal layers. The router has to find paths between source and destination while making sure there are no unwanted connections or design-rule violations.
+
+* Routing is generally divided into **Global/Fast Routing** and **Detailed Routing**. Global routing first decides the approximate path and which regions/layers should be used. It does not worry about the exact metal shapes yet.
+
+* **Detailed routing** comes after that. Here, the actual tracks, metal segments and vias are decided. It works with the detailed routing grid and has to obey the actual spacing, width, layer and connectivity rules.
+
+* TritonRoute takes things such as **LEF, DEF and preprocessed route guides** as inputs. Its job is to produce a detailed routing solution while trying to keep the **wire length and number of vias** reasonable. It also has to follow the route guides, maintain connectivity and obey design rules.
+
+* Before detailed routing, the original route guides need some **preprocessing**. The initial guides may be too large or may not be properly aligned with the routing tracks, so they are modified into a form that the detailed router can actually use.
+
+* The preprocessing mainly involves **splitting, merging and bridging**. Splitting breaks larger guide regions into smaller usable pieces, merging combines compatible regions, and bridging connects separated guide portions when required.
+
+* A good preprocessed route guide should have **unit width** and should follow the **preferred routing direction** of its metal layer. In the example, M1 is preferred for vertical routing while M2 is preferred for horizontal routing.
+
+* **Access Points (APs)** are important because the router needs specific locations from which a net can enter or leave a routing segment or connect to a pin. Basically, they provide legal points where the router can make a connection.
+
+* An access point can connect to a **lower metal layer**, connect directly to a **pin shape**, or connect to an **upper metal layer**. When changing between layers, a **via** is required.
+
+* The access-point concept is especially important when a pin exists on one layer but the routing path needs to continue on another layer. The router therefore has to find a legal point and a legal via connection rather than simply drawing a wire wherever it wants.
+
+* After the access points are identified, the router needs to decide **how all the terminals should be connected**. This is where the **routing topology** comes in.
+
+* The routing topology can be optimized using a **Minimum Spanning Tree (MST)**. First, the distances/costs between the different access points are calculated. These costs represent how expensive it is to connect one point to another.
+
+* The algorithm considers every pair of access points and calculates something like `cost(i,j) = distance(APCi, APCj)`. Then the MST is generated using these costs.
+
+* The main idea of MST is to connect **all required points with minimum total connection cost**, without creating unnecessary loops. This gives the global router a good starting topology before the actual detailed routing happens.
+
+* Once the topology is decided, the router still has to find actual physical paths through the routing grid. This is where **maze routing** becomes useful.
+
+* In maze routing, the routing area is treated like a **2-D grid**. Each grid location can either be available for routing or blocked because of cells, existing metal, obstacles or design rules.
+
+* The router starts from one terminal and explores neighbouring grid locations until it reaches the destination. Different grid locations can have different costs, so the router tries to choose a path with the lowest overall cost.
+
+* **Straight movement** is generally given a lower cost, while turns can have higher costs. This encourages the router to avoid unnecessary bends and helps produce shorter and cleaner routes.
+
+* The numbers shown in the maze-routing example represent the **cost/distance from the target point**. The router expands through neighbouring grid cells and eventually finds a path connecting the required terminals.
+
+* The overall idea is therefore not just "draw a wire between two points." The router has to consider **routing tracks, preferred directions, obstacles, access points, vias, wire length, connectivity and design rules** at the same time.
+
+* In the bigger picture, the routing flow can be remembered as:
+
+**Preprocess route guides → Find access points → Build routing topology using MST → Global/Fast routing → Detailed/Maze routing → Check DRC**
+
+* In your OpenLane flow, after PDN generation, the actual routing was performed using `run_routing`. The resulting design contained routing across multiple metal layers and a very large number of vias. 
+
+* The important final check after detailed routing is **DRC**. In your run, the detailed routing completed with **no DRC violations**, which means the generated layout satisfied the checked physical design rules. 
+
+**One-line memory trick:**
+**Guide → Access Point → Topology → Global Route → Maze/Detailed Route → DRC**.
+
+
+<img width="196" height="347" alt="image" src="https://github.com/user-attachments/assets/ed9efd71-be44-4608-bfad-26fc010a50c1" />
+
+
+**short notes**
 
 
 
