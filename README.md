@@ -1278,7 +1278,6 @@ including ###
 <img width="196" height="347" alt="image" src="https://github.com/user-attachments/assets/ed9efd71-be44-4608-bfad-26fc010a50c1" />
 
 
-**short notes**
 
 
 
